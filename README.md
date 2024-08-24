@@ -34,9 +34,6 @@ Then, run `flutter pub get` to install the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
 import 'package:custom_segment_control/custom_segment_control.dart';
 
