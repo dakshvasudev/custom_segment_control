@@ -1,6 +1,6 @@
 name: custom_segment_control
 description: "A custom segment control for flutter"
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/dakshvasudev/custom_segment_control.git
 
 environment:
