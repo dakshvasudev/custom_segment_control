@@ -11,17 +11,26 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This Flutter package provides a customizable segment control widget that allows users to toggle between two options. The widget supports various customization options including text, colors, font size, animations, and background images for each segment. It also includes drag gestures for seamless interaction and is ideal for scenarios requiring a binary choice, such as switching between two modes or options.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Customizable Appearance**: Adjust text, font size, font weight, colors, and background images for both options.
+- **Smooth Animations**: Built-in animations with customizable curves and durations.
+- **Interactive Drag Gestures**: Users can switch between options with swipe gestures.
+- **Configurable Shadow and Borders**: Add custom shadows and borders to match your app’s design.
+- **Flexible Integration**: Easily integrate into any Flutter project with support for state management.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use this package, add `custom_segment_control` as a dependency in your `pubspec.yaml` file.
+
+```yaml
+dependencies:
+  custom_segment_control: ^1.0.0
+```
+
+Then, run `flutter pub get` to install the package.
 
 ## Usage
 
@@ -29,21 +38,50 @@ TODO: Include short and useful examples for package users. Add longer examples
 to `/example` folder.
 
 ```dart
-bool _pro = false;
+import 'package:custom_segment_control/custom_segment_control.dart';
 
-SegmentControl(
-    isProModeSelected: _pro,
-    onModeChange: (isProMode) {
-        setState(() {
-            _pro = isProMode;
-        });
-    },
-),
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _pro = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Custom Segment Control Example'),
+      ),
+      body: Center(
+        child: CustomSegmentControl(
+          option1Text: 'Free',
+          option2Text: 'Pro',
+          onOptionChange: (isProMode) {
+            setState(() {
+              _pro = isProMode;
+            });
+          },
+          option1SelectedColor: Colors.blue,
+          option2SelectedColor: Colors.green,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+If you encounter any issues, feel free to open an issue on the GitHub repository.
+
+Contributions are welcome! Whether it's reporting bugs, suggesting features, or submitting a pull request, your input is appreciated.
+
+For further details or support, you can reach out to the package authors via the repository or through the contact information provided.
+
+Happy coding! 🚀
+
 # custom_segment_control
