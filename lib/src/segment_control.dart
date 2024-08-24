@@ -3,27 +3,35 @@ import 'package:flutter/material.dart';
 class CustomSegmentControl extends StatefulWidget {
   final ValueChanged<bool> onOptionChange;
   final bool option2Selected;
+  final String option1Text;
+  final String option2Text;
+  final double? fontSize;
   final Color? backgroundColor;
   final Color? borderColor;
-  final String optionText1;
-  final String optionText2;
-  final double? fontSize;
+  final Color? option1SelectedColor;
+  final Color? option2SelectedColor;
   final List<BoxShadow>? boxShadow;
   final Curve? animationCurve;
   final FontWeight? fontWeight;
+  final DecorationImage? option1DecorationImage;
+  final DecorationImage? option2DecorationImage;
 
   const CustomSegmentControl({
     super.key,
     required this.onOptionChange,
-    required this.optionText1,
-    required this.optionText2,
-    this.option2Selected = true,
+    required this.option1Text,
+    required this.option2Text,
     this.backgroundColor,
     this.borderColor,
     this.fontSize,
     this.boxShadow,
     this.animationCurve,
     this.fontWeight,
+    this.option1DecorationImage,
+    this.option2DecorationImage,
+    this.option2Selected = true,
+    this.option1SelectedColor = Colors.black,
+    this.option2SelectedColor = Colors.black,
   });
 
   @override
@@ -90,15 +98,12 @@ class _CustomSegmentControlState extends State<CustomSegmentControl> {
                 width: 180,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: _isSecondOptionSelected ? null : Colors.black,
+                  color: _isSecondOptionSelected
+                      ? widget.option2SelectedColor
+                      : widget.option1SelectedColor,
                   image: _isSecondOptionSelected
-                      ? const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/ai_tools/suraasa_gradient.png',
-                          ),
-                          fit: BoxFit.fitWidth,
-                        )
-                      : null,
+                      ? widget.option2DecorationImage
+                      : widget.option1DecorationImage,
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
@@ -120,7 +125,7 @@ class _CustomSegmentControlState extends State<CustomSegmentControl> {
                     color: Colors.transparent,
                     alignment: Alignment.center,
                     child: Text(
-                      widget.optionText1,
+                      widget.option1Text,
                       style: TextStyle(
                         fontSize: widget.fontSize ?? 14,
                         fontWeight: widget.fontWeight ?? FontWeight.w600,
@@ -146,7 +151,7 @@ class _CustomSegmentControlState extends State<CustomSegmentControl> {
                     color: Colors.transparent,
                     alignment: Alignment.center,
                     child: Text(
-                      widget.optionText2,
+                      widget.option2Text,
                       style: TextStyle(
                         fontSize: widget.fontSize ?? 14,
                         color: _isSecondOptionSelected
