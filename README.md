@@ -15,6 +15,8 @@ This Flutter package provides a customizable segment control widget that allows 
 
 ## Features
 
+![ScreenRecording2024-08-25at1 06 25AM-ezgif com-crop](https://github.com/user-attachments/assets/02e8928e-d942-46f5-b34b-fb45f7110959)
+
 - **Customizable Appearance**: Adjust text, font size, font weight, colors, and background images for both options.
 - **Smooth Animations**: Built-in animations with customizable curves and durations.
 - **Interactive Drag Gestures**: Users can switch between options with swipe gestures.
