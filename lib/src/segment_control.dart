@@ -35,7 +35,7 @@ class CustomSegmentControl extends StatefulWidget {
   });
 
   @override
-  _CustomSegmentControlState createState() => _CustomSegmentControlState();
+  State<CustomSegmentControl> createState() => _CustomSegmentControlState();
 }
 
 class _CustomSegmentControlState extends State<CustomSegmentControl> {
