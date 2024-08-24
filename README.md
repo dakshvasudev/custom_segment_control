@@ -35,40 +35,19 @@ Then, run `flutter pub get` to install the package.
 ## Usage
 
 ```dart
-import 'package:custom_segment_control/custom_segment_control.dart';
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool _pro = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Custom Segment Control Example'),
-      ),
-      body: Center(
-        child: CustomSegmentControl(
-          option1Text: 'Free',
-          option2Text: 'Pro',
-          onOptionChange: (isProMode) {
-            setState(() {
-              _pro = isProMode;
-            });
-          },
-          option1SelectedColor: Colors.blue,
-          option2SelectedColor: Colors.green,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-}
+CustomSegmentControl(
+  option1Text: 'Free',
+  option2Text: 'Pro',
+  onOptionChange: (isProMode) {
+    setState(() {
+      _pro = isProMode;
+    });
+  },
+  option1SelectedColor: Colors.blue,
+  option2SelectedColor: Colors.green,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+),
 ```
 
 ## Additional information
