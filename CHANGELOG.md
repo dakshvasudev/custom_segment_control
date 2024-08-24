@@ -2,7 +2,7 @@
 
 - Currently the segment control has option to control two segment buttons, apply various customizable props to it.
 
-- Is not tested and stable.
+- Is now tested and stable.
 
 ## 0.1.0 (Unstable)
 
