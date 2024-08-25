@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Updating readme for a better UI explanation
+
 ## 1.1.1
 
 - Updating the change log and minor bug fixes for examples in the github repository.
