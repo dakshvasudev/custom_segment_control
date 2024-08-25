@@ -1,4 +1,4 @@
-## 1.0.1
+## 1.1.0
 
 - Addition of example folder and minor bug fixes.
 

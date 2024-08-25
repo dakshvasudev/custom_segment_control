@@ -1,5 +1,5 @@
 name: custom_segment_control
-description: "A custom segment control for flutter"
+description: "Customizable segment control widget that allows users to toggle between various options. The widget supports various customization options including text, colors, font size, animations, and background images for each segment. It also includes drag gestures for seamless interaction and is ideal for scenarios requiring a binary choice, such as switching between two modes or options."
 version: 1.1.0
 homepage: https://github.com/dakshvasudev/custom_segment_control.git
 
