@@ -14,6 +14,7 @@ and the Flutter guide for
 This Flutter package provides a customizable segment control widget that allows users to toggle between two options. The widget supports various customization options including text, colors, font size, animations, and background images for each segment. It also includes drag gestures for seamless interaction and is ideal for scenarios requiring a binary choice, such as switching between two modes or options.
 
 ## Features
+<img width="312" alt="Screenshot 2024-08-25 at 1 57 01 PM" src="https://github.com/user-attachments/assets/6516bf8b-4a74-49d9-8828-f712f77161fb">
 
 ![ScreenRecording2024-08-25at1 06 25AM-ezgif com-crop](https://github.com/user-attachments/assets/02e8928e-d942-46f5-b34b-fb45f7110959)
 
