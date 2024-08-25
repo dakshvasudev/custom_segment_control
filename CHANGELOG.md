@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Updating the change log and minor bug fixes for examples in the github repository.
+
 ## 1.1.0
 
 - Addition of example folder and minor bug fixes.
