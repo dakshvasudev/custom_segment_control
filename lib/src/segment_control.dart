@@ -1,21 +1,52 @@
 import 'package:flutter/material.dart';
 
+///A customizable segment control widget that allows for selecting
+///between multiple options, with animated transitions and styling options.
 class CustomSegmentControl extends StatefulWidget {
+  /// A callback function that is triggered when the selected option changes.
+  /// Returns the index of the selected option.
   final ValueChanged<int> onOptionChange;
+
+  ///A list of strings representing the options in the segment control.
   final List<String> options;
+
+  /// The width of the entire segment control. If not provided, it will default to the width of the screen.
   final double? boxWidth;
+
+  /// The font size of the text in each option. Defaults to 14.
   final double? fontSize;
+
+  ///The background color of the segment control. Defaults to Colors.white.
   final Color? backgroundColor;
+
+  ///The color of the border surrounding the segment control. Defaults to Color(0xffE2E8F0).
   final Color? borderColor;
+
+  ///The background color of the selected option. Defaults to Colors.black.
   final Color? selectedBackgroundColor;
+
+  ///The color of the text for the selected option. Defaults to Colors.white.
   final Color? selectedTextColor;
+
+  ///The color of the text for the unselected options. Defaults to Colors.black.
   final Color? unselectedTextColor;
+
+  ///A list of shadows cast by the segment control container. Defaults to a subtle shadow.
   final List<BoxShadow>? boxShadow;
+
+  ///The animation curve for the transition between options. Defaults to Curves.easeInOut.
   final Curve? animationCurve;
+
+  ///The font weight of the text in each option. Defaults to FontWeight.w600.
   final FontWeight? fontWeight;
+
+  /// A list of images to be used as backgrounds for each option when selected. If provided, it should match the length of the options list.
   final List<DecorationImage?>? decorationImages;
+
+  ///The index of the initially selected option. Defaults to 0.
   final int initialSelectedIndex;
 
+  ///Constructor
   const CustomSegmentControl({
     super.key,
     required this.onOptionChange,
