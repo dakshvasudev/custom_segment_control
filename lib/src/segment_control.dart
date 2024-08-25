@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 
 class CustomSegmentControl extends StatefulWidget {
-  final ValueChanged<bool> onOptionChange;
-  final bool option2Selected;
-  final String option1Text;
-  final String option2Text;
+  final ValueChanged<int> onOptionChange;
+  final List<String> options;
+  final double? boxWidth;
   final double? fontSize;
   final Color? backgroundColor;
   final Color? borderColor;
-  final Color? option1SelectedColor;
-  final Color? option2SelectedColor;
+  final Color? selectedBackgroundColor;
+  final Color? selectedTextColor;
+  final Color? unselectedTextColor;
   final List<BoxShadow>? boxShadow;
   final Curve? animationCurve;
   final FontWeight? fontWeight;
-  final DecorationImage? option1DecorationImage;
-  final DecorationImage? option2DecorationImage;
+  final List<DecorationImage?>? decorationImages;
+  final int initialSelectedIndex;
 
   const CustomSegmentControl({
     super.key,
     required this.onOptionChange,
-    required this.option1Text,
-    required this.option2Text,
+    required this.options,
+    this.boxWidth,
     this.backgroundColor,
     this.borderColor,
     this.fontSize,
     this.boxShadow,
     this.animationCurve,
     this.fontWeight,
-    this.option1DecorationImage,
-    this.option2DecorationImage,
-    this.option2Selected = true,
-    this.option1SelectedColor = Colors.black,
-    this.option2SelectedColor = Colors.black,
+    this.decorationImages,
+    this.initialSelectedIndex = 0,
+    this.selectedBackgroundColor = Colors.black,
+    this.unselectedTextColor = Colors.black,
+    this.selectedTextColor = Colors.white,
   });
 
   @override
@@ -39,36 +39,37 @@ class CustomSegmentControl extends StatefulWidget {
 }
 
 class _CustomSegmentControlState extends State<CustomSegmentControl> {
-  late bool _isSecondOptionSelected;
+  late int _selectedIndex;
   final _animationDuration = 150;
 
   @override
   void initState() {
     super.initState();
-    _isSecondOptionSelected = widget.option2Selected;
+    _selectedIndex = widget.initialSelectedIndex;
   }
 
   void _onDragUpdate(DragUpdateDetails details) {
-    if (details.primaryDelta! < -10) {
-      setState(() {
-        _isSecondOptionSelected = false;
-      });
+    setState(() {
+      if (details.primaryDelta! < -10 &&
+          _selectedIndex < widget.options.length - 1) {
+        _selectedIndex++;
+      } else if (details.primaryDelta! > 10 && _selectedIndex > 0) {
+        _selectedIndex--;
+      }
       Future.delayed(Duration(milliseconds: _animationDuration))
-          .then((value) => {widget.onOptionChange(false)});
-    } else if (details.primaryDelta! > 10) {
-      setState(() {
-        _isSecondOptionSelected = true;
-      });
-      Future.delayed(Duration(milliseconds: _animationDuration))
-          .then((value) => {widget.onOptionChange(true)});
-    }
+          .then((value) => {widget.onOptionChange(_selectedIndex)});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final optionWidth = (widget.boxWidth ?? MediaQuery.sizeOf(context).width) /
+            widget.options.length -
+        (2 / widget.options.length);
+
     return Center(
       child: Container(
-        width: 360,
+        width: widget.boxWidth ?? MediaQuery.sizeOf(context).width,
         height: 34,
         margin: const EdgeInsets.only(top: 12),
         decoration: BoxDecoration(
@@ -91,78 +92,53 @@ class _CustomSegmentControlState extends State<CustomSegmentControl> {
             AnimatedAlign(
               curve: widget.animationCurve ?? Curves.easeInOut,
               duration: Duration(milliseconds: _animationDuration),
-              alignment: _isSecondOptionSelected
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
+              alignment: Alignment(
+                  -1 + 2 * _selectedIndex / (widget.options.length - 1), 0),
               child: Container(
-                width: 180,
+                width: optionWidth,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: _isSecondOptionSelected
-                      ? widget.option2SelectedColor
-                      : widget.option1SelectedColor,
-                  image: _isSecondOptionSelected
-                      ? widget.option2DecorationImage
-                      : widget.option1DecorationImage,
+                  color: widget.selectedBackgroundColor,
+                  image: widget.decorationImages != null
+                      ? widget.decorationImages![_selectedIndex]
+                      : null,
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),
             Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isSecondOptionSelected = false;
-                    });
-                    Future.delayed(Duration(milliseconds: _animationDuration))
-                        .then((value) => {widget.onOptionChange(false)});
-                  },
-                  onHorizontalDragUpdate: _onDragUpdate,
-                  child: Container(
-                    height: 30,
-                    width: 178,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: Text(
-                      widget.option1Text,
-                      style: TextStyle(
-                        fontSize: widget.fontSize ?? 14,
-                        fontWeight: widget.fontWeight ?? FontWeight.w600,
-                        color: _isSecondOptionSelected
-                            ? const Color(0xff0F172A)
-                            : Colors.white,
+              children: List.generate(
+                widget.options.length,
+                (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                      Future.delayed(Duration(milliseconds: _animationDuration))
+                          .then((value) =>
+                              {widget.onOptionChange(_selectedIndex)});
+                    },
+                    onHorizontalDragUpdate: _onDragUpdate,
+                    child: Container(
+                      height: 30,
+                      width: optionWidth,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Text(
+                        widget.options[index],
+                        style: TextStyle(
+                          fontSize: widget.fontSize ?? 14,
+                          fontWeight: widget.fontWeight ?? FontWeight.w600,
+                          color: _selectedIndex == index
+                              ? widget.selectedTextColor
+                              : widget.unselectedTextColor,
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isSecondOptionSelected = true;
-                    });
-                    Future.delayed(Duration(milliseconds: _animationDuration))
-                        .then((value) => {widget.onOptionChange(true)});
-                  },
-                  onHorizontalDragUpdate: _onDragUpdate,
-                  child: Container(
-                    height: 50,
-                    width: 178,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: Text(
-                      widget.option2Text,
-                      style: TextStyle(
-                        fontSize: widget.fontSize ?? 14,
-                        color: _isSecondOptionSelected
-                            ? Colors.white
-                            : Colors.black,
-                        fontWeight: widget.fontWeight ?? FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ],
         ),

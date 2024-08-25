@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _pro = false;
+  int _stringValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,67 +45,68 @@ class _MyAppState extends State<MyApp> {
           const Text('Example : For a custom color segment control'),
           Center(
             child: CustomSegmentControl(
-              option1Text: 'Free',
-              option2Text: 'Pro',
-              onOptionChange: (isProMode) {
+              options: const ['Basic', 'Pro', 'Option 3', 'Option 4'],
+              onOptionChange: (value) {
                 setState(() {
-                  _pro = isProMode;
+                  _stringValue = value;
                 });
               },
-              option1SelectedColor: Colors.black,
-              option2SelectedColor: Colors.red,
+              boxWidth: MediaQuery.sizeOf(context).width * 0.8,
+              selectedBackgroundColor: Colors.red,
+              unselectedTextColor: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
+          // const Text('Example : For a decoration image'),
+          // Center(
+          //   child: CustomSegmentControl(
+          //     option1Text: 'Free',
+          //     option2Text: 'Pro',
+          //     onOptionChange: (isProMode) {
+          //       setState(() {
+          //         _pro = isProMode;
+          //       });
+          //     },
+          //     option1SelectedColor: Colors.black,
+          //     option2DecorationImage: const DecorationImage(
+          //       image: AssetImage('assets/images/example1.jpg'),
+          //       fit: BoxFit.fitWidth,
+          //     ),
+          //     fontSize: 16,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
+          // const Text(
+          //   'Example : For custom inactive window color specification',
+          // ),
+          // Center(
+          //   child: CustomSegmentControl(
+          //     option1Text: 'Free',
+          //     option2Text: 'Pro',
+          //     onOptionChange: (isProMode) {
+          //       setState(() {
+          //         _pro = isProMode;
+          //       });
+          //     },
+          //     backgroundColor: Colors.green,
+          //     option1SelectedColor: Colors.black,
+          //     fontSize: 16,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           const SizedBox(
             height: 16,
           ),
-          const Text('Example : For a decoration image'),
-          Center(
-            child: CustomSegmentControl(
-              option1Text: 'Free',
-              option2Text: 'Pro',
-              onOptionChange: (isProMode) {
-                setState(() {
-                  _pro = isProMode;
-                });
-              },
-              option1SelectedColor: Colors.black,
-              option2DecorationImage: const DecorationImage(
-                image: AssetImage('assets/images/example1.jpg'),
-                fit: BoxFit.fitWidth,
-              ),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          const Text(
-            'Example : For custom inactive window color specification',
-          ),
-          Center(
-            child: CustomSegmentControl(
-              option1Text: 'Free',
-              option2Text: 'Pro',
-              onOptionChange: (isProMode) {
-                setState(() {
-                  _pro = isProMode;
-                });
-              },
-              backgroundColor: Colors.green,
-              option1SelectedColor: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          if (_pro) const Text('You are on the pro screen'),
-          if (!_pro) const Text('You are on the free screen'),
+          Text(
+            'You are on screen ${_stringValue + 1}',
+          )
         ],
       ),
     );
